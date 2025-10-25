@@ -978,18 +978,19 @@ body {
   display: grid;
   grid-template-columns: repeat(18, 1fr);
   grid-template-rows: repeat(4, 1fr);
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  min-height: 400px;
-  max-height: 450px;
-  overflow: hidden;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  min-height: 280px;
+  max-height: 300px;
+  overflow: visible;
 }
 
 .periodic-element {
   aspect-ratio: 1;
-  padding: 0.5rem;
-  border-radius: 8px;
-  border: 3px solid;
+  padding: 0.2rem;
+  border-radius: 4px;
+  border: 1.5px solid;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -997,13 +998,15 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   background: white;
+  transform: scale(0.7);
 }
 
 .periodic-element:hover {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  transform: translateY(-5px);
+  transform: scale(1.4);
+  z-index: 100;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 .available-element {
@@ -1054,15 +1057,15 @@ body {
 .disabled-element .element-status {
   background: rgba(239, 68, 68, 0.2);
   color: #EF4444;
-  font-size: 1.2rem;
+  font-size: 0.7rem;
   z-index: 1;
 }
 
 .element-status {
   position: absolute;
-  top: 2px;
-  right: 2px;
-  font-size: 1rem;
+  top: 1px;
+  right: 1px;
+  font-size: 0.65rem;
   animation: pulse 2s ease-in-out infinite;
 }
 
@@ -1078,31 +1081,33 @@ body {
 }
 
 .element-number {
-  font-size: 0.7rem;
+  font-size: 0.45rem;
   opacity: 0.6;
   position: absolute;
-  top: 5px;
-  left: 5px;
+  top: 2px;
+  left: 2px;
 }
 
 .element-symbol-large {
-  font-size: 1.8rem;
+  font-size: 1rem;
   font-weight: bold;
   color: #333;
+  margin: 0;
+  line-height: 1;
 }
 
 .element-name-small {
-  font-size: 0.7rem;
+  font-size: 0.45rem;
   opacity: 0.7;
-  margin-top: 0.2rem;
+  margin-top: 0.05rem;
   text-align: center;
   line-height: 1;
 }
 
 .element-mass {
-  font-size: 0.6rem;
+  font-size: 0.4rem;
   opacity: 0.5;
-  margin-top: 0.2rem;
+  margin-top: 0.05rem;
 }
 
 /* Sayfalama Kontrolleri */

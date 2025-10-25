@@ -1,5 +1,4 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { getUsableElements, elementRestrictions } from '../reactions';
 
@@ -7,22 +6,6 @@ const PeriodicTable = ({ isOpen, onClose, availableElements, allElements, onTogg
   // Kullanılabilir elementler
   const usableElements = getUsableElements();
   
-  // Sayfa durumu
-  const [currentPage, setCurrentPage] = useState(1);
-  // Sayfa 1: İlk 3 periyot + 4. periyodun ilk kısmı
-  const page1Elements = ['H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 
-                         'Na', 'Mg', 'Al', 'Si', 'P', 'S', 'Cl', 'Ar',
-                         'K', 'Ca', 'Sc', 'Ti', 'V', 'Cr', 'Mn', 'Fe'];
-  
-  // Sayfa 2: 4. periyodun geri kalanı
-  const page2Elements = ['H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne',
-                         'Na', 'Mg', 'Al', 'Si', 'P', 'S', 'Cl', 'Ar',
-                         'K', 'Ca', 'Co', 'Ni', 'Cu', 'Zn', 'Ga', 'Ge', 'As', 'Se', 'Br', 'Kr'];
-  
-  // Mevcut sayfaya göre gösterilecek elementler
-  const visibleElements = currentPage === 1 
-    ? allElements.filter(el => page1Elements.includes(el.symbol))
-    : allElements.filter(el => page2Elements.includes(el.symbol));
 
   // Grid pozisyonları için periyot ve grup bilgileri
   const gridPositions = {
@@ -185,7 +168,7 @@ const PeriodicTable = ({ isOpen, onClose, availableElements, allElements, onTogg
 
             {/* Periyodik Tablo Grid */}
             <div className="periodic-table-grid">
-              {visibleElements.map((element) => {
+              {allElements.map((element) => {
                 const usable = isUsable(element.symbol);
                 const available = isAvailable(element.symbol);
                 
@@ -221,25 +204,6 @@ const PeriodicTable = ({ isOpen, onClose, availableElements, allElements, onTogg
                   </motion.div>
                 );
               })}
-            </div>
-
-            {/* Sayfalama Butonları */}
-            <div className="pagination-controls">
-              <button
-                className={`page-btn ${currentPage === 1 ? 'active' : ''}`}
-                onClick={() => setCurrentPage(1)}
-              >
-                1
-              </button>
-              <button
-                className={`page-btn ${currentPage === 2 ? 'active' : ''}`}
-                onClick={() => setCurrentPage(2)}
-              >
-                2
-              </button>
-              <span className="page-info">
-                {currentPage === 1 ? 'İlk 3 Periyot + Geçiş Metali' : '4. Periyot Devamı'}
-              </span>
             </div>
 
             {/* Kategori Lejantı */}
