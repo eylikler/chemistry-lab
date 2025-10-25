@@ -156,6 +156,32 @@ export const allPeriodicElements = [
   { symbol: 'Ca', name: 'Kalsiyum', atomicNumber: 20, mass: 40.08, color: '#E5E7EB', textColor: '#374151', category: 'alkaline-earth' },
 ];
 
+// Reaksiyonlarda kullanılan elementleri otomatik topla
+export const getUsableElements = () => {
+  const usedElements = new Set();
+  Object.values(reactions).forEach(reaction => {
+    reaction.elements.forEach(element => {
+      usedElements.add(element);
+    });
+  });
+  return Array.from(usedElements);
+};
+
+// Element eklenememe nedenleri (eğitici açıklamalar)
+export const elementRestrictions = {
+  'He': 'Helyum soy gazdır ve başka elementlerle bileşik oluşturmaz. Elektron kabukları tamamen doludur.',
+  'Ne': 'Neon soy gazdır ve kimyasal reaksiyona girmez. Doğada tek başına bulunur.',
+  'Ar': 'Argon soy gazdır ve diğer elementlerle tepkime vermez. Çok kararlı bir yapıya sahiptir.',
+  'Li': 'Lityum çok reaktiftir ve su ile patlayıcı reaksiyon verir. Güvenlik nedeniyle henüz desteklenmiyor.',
+  'Be': 'Berilyum ve bileşikleri zehirlidir. Sağlık riski nedeniyle şu an için desteklenmiyor.',
+  'B': 'Bor ile bilinen bileşikler (borik asit gibi) henüz veritabanına eklenmedi.',
+  'F': 'Flor en reaktif elementtir ve çok tehlikelidir. Güvenlik nedeniyle devre dışı bırakıldı.',
+  'Al': 'Alüminyum reaksiyonları (Al₂O₃ gibi) gelecek güncellemelerde eklenecek.',
+  'Si': 'Silisyum bileşikleri (SiO₂ gibi) henüz desteklenmiyor. Yakında eklenecek.',
+  'P': 'Fosfor çok reaktiftir ve kendiliğinden yanabilir. Güvenlik nedeniyle beklemede.',
+  'K': 'Potasyum su ile patlayıcı reaksiyon verir ve alev alır. Çok tehlikelidir.',
+};
+
 // Toplam bileşik sayısını hesapla
 export const getTotalCompounds = () => Object.keys(reactions).length;
 

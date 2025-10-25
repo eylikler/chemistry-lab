@@ -261,7 +261,17 @@ function App() {
   return (
     <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       <div className="app">
-        <Toaster position="top-center" />
+        <Toaster 
+          position="top-center"
+          toastOptions={{
+            style: {
+              zIndex: 10003,
+            },
+          }}
+          containerStyle={{
+            zIndex: 10003,
+          }}
+        />
 
         {/* Arka plan parçacıkları */}
         <div className="background-particles">

@@ -1,6 +1,10 @@
 import { motion, AnimatePresence } from 'framer-motion';
+import toast from 'react-hot-toast';
+import { getUsableElements, elementRestrictions } from '../reactions';
 
 const PeriodicTable = ({ isOpen, onClose, availableElements, allElements, onToggleElement }) => {
+  // Kullanılabilir elementler
+  const usableElements = getUsableElements();
   // Grid pozisyonları için periyot ve grup bilgileri
   const gridPositions = {
     'H': { group: 1, period: 1 },
@@ -28,6 +32,11 @@ const PeriodicTable = ({ isOpen, onClose, availableElements, allElements, onTogg
   // Ana ekranda olup olmadığını kontrol et
   const isAvailable = (symbol) => {
     return availableElements.some(el => el.symbol === symbol);
+  };
+
+  // Element kullanılabilir mi kontrol et
+  const isUsable = (symbol) => {
+    return usableElements.includes(symbol);
   };
 
   // Kategori renkleri
@@ -62,7 +71,43 @@ const PeriodicTable = ({ isOpen, onClose, availableElements, allElements, onTogg
 
   // Element tıklama işlemi
   const handleElementClick = (element) => {
+    // Kullanılabilir element mi kontrol et
+    if (!isUsable(element.symbol)) {
+      // Kısıtlama nedeni varsa göster
+      const reason = elementRestrictions[element.symbol];
+      toast.error(
+        <div>
+          <strong>❌ {element.name} eklenemez!</strong>
+          <br />
+          <span style={{ fontSize: '0.9rem' }}>{reason}</span>
+        </div>,
+        {
+          duration: 5000,
+          style: {
+            background: '#FEE2E2',
+            color: '#991B1B',
+            border: '2px solid #DC2626',
+          },
+        }
+      );
+      return;
+    }
+
+    // Kullanılabilir elementse ekle/çıkar
     onToggleElement(element);
+    
+    // Başarı mesajı
+    if (isAvailable(element.symbol)) {
+      toast.success(`${element.name} ana ekrandan çıkarıldı!`, {
+        icon: '➖',
+        duration: 2000,
+      });
+    } else {
+      toast.success(`${element.name} ana ekrana eklendi!`, {
+        icon: '➕',
+        duration: 2000,
+      });
+    }
   };
 
   return (
@@ -96,37 +141,49 @@ const PeriodicTable = ({ isOpen, onClose, availableElements, allElements, onTogg
               <p>
                 <strong>Tıklayarak elementleri ekleyin/çıkarın!</strong><br/>
                 <span className="available-indicator">✅</span> Ana ekranda mevcut | 
-                <span className="unavailable-indicator">➕</span> Tıklayarak ekleyin
+                <span className="unavailable-indicator">➕</span> Tıklayarak ekleyin | 
+                <span className="disabled-indicator">🚫</span> Kullanılamaz
               </p>
             </div>
 
             {/* Periyodik Tablo Grid */}
             <div className="periodic-table-grid">
-              {allElements.map((element) => (
-                <motion.div
-                  key={element.symbol}
-                  className={`periodic-element ${isAvailable(element.symbol) ? 'available-element' : 'unavailable-element'}`}
-                  style={{
-                    ...getGridPosition(element.symbol),
-                    backgroundColor: element.color,
-                    borderColor: categoryColors[element.category],
-                  }}
-                  whileHover={{ scale: 1.1, zIndex: 10 }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: element.atomicNumber * 0.02 }}
-                  onClick={() => handleElementClick(element)}
-                >
-                  <span className="element-status">
-                    {isAvailable(element.symbol) ? '✅' : '➕'}
-                  </span>
-                  <div className="element-number">{element.atomicNumber}</div>
-                  <div className="element-symbol-large">{element.symbol}</div>
-                  <div className="element-name-small">{element.name}</div>
-                  <div className="element-mass">{element.mass}</div>
-                </motion.div>
-              ))}
+              {allElements.map((element) => {
+                const usable = isUsable(element.symbol);
+                const available = isAvailable(element.symbol);
+                
+                return (
+                  <motion.div
+                    key={element.symbol}
+                    className={`periodic-element ${
+                      !usable ? 'disabled-element' : 
+                      available ? 'available-element' : 
+                      'unavailable-element'
+                    }`}
+                    style={{
+                      ...getGridPosition(element.symbol),
+                      backgroundColor: usable ? element.color : '#D1D5DB',
+                      borderColor: usable ? categoryColors[element.category] : '#9CA3AF',
+                      opacity: usable ? 1 : 0.5,
+                      cursor: usable ? 'pointer' : 'not-allowed',
+                    }}
+                    whileHover={usable ? { scale: 1.1, zIndex: 10 } : { scale: 1.05 }}
+                    whileTap={usable ? { scale: 0.95 } : {}}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: usable ? 1 : 0.5, scale: 1 }}
+                    transition={{ delay: element.atomicNumber * 0.02 }}
+                    onClick={() => handleElementClick(element)}
+                  >
+                    <span className="element-status">
+                      {!usable ? '🚫' : available ? '✅' : '➕'}
+                    </span>
+                    <div className="element-number">{element.atomicNumber}</div>
+                    <div className="element-symbol-large">{element.symbol}</div>
+                    <div className="element-name-small">{element.name}</div>
+                    <div className="element-mass">{element.mass}</div>
+                  </motion.div>
+                );
+              })}
             </div>
 
             {/* Kategori Lejantı */}
