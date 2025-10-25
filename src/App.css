@@ -131,6 +131,7 @@ body {
   cursor: grab;
   transition: all 0.3s ease;
   user-select: none;
+  position: relative;
 }
 
 .element-card:active {
@@ -148,6 +149,41 @@ body {
 
 .element-card:hover .element-card-inner {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Ekle Butonu */
+.element-add-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #10B981;
+  background: #10B981;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+  z-index: 10;
+  line-height: 1;
+  padding: 0;
+}
+
+.element-add-btn:hover {
+  background: #059669;
+  border-color: #059669;
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.6);
+}
+
+.element-add-btn:active {
+  transform: scale(0.95);
 }
 
 .atomic-number {
@@ -977,12 +1013,12 @@ body {
 .periodic-table-grid {
   display: grid;
   grid-template-columns: repeat(18, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
   gap: 0.25rem;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
-  min-height: 280px;
-  max-height: 300px;
+  min-height: 320px;
+  max-height: 350px;
   overflow: visible;
 }
 

@@ -110,6 +110,86 @@ export const reactions = {
     effect: 'crystallize',
     description: 'Enerji kaynağımız!',
     points: 500
+  },
+  'KCl': {
+    name: 'Potasyum Klorür',
+    elements: ['K', 'Cl'],
+    color: '#F3F4F6',
+    effect: 'crystallize',
+    description: 'Gübre ve ilaçta kullanılır!',
+    points: 130
+  },
+  'Al2O3': {
+    name: 'Alüminyum Oksit',
+    elements: ['Al', 'Al', 'O', 'O', 'O'],
+    color: '#E5E7EB',
+    effect: 'crystallize',
+    description: 'Seramik ve zımpara!',
+    points: 250
+  },
+  'SiO2': {
+    name: 'Silikon Dioksit (Kum)',
+    elements: ['Si', 'O', 'O'],
+    color: '#FEF3C7',
+    effect: 'crystallize',
+    description: 'Cam yapımında kullanılır!',
+    points: 200
+  },
+  'CuSO4': {
+    name: 'Bakır Sülfat',
+    elements: ['Cu', 'S', 'O', 'O', 'O', 'O'],
+    color: '#3B82F6',
+    effect: 'crystallize',
+    description: 'Mavi kristal, fungisit!',
+    points: 280
+  },
+  'Fe2O3': {
+    name: 'Demir Oksit (Pas)',
+    elements: ['Fe', 'Fe', 'O', 'O', 'O'],
+    color: '#DC2626',
+    effect: 'smoke',
+    description: 'Kırmızı pas!',
+    points: 220
+  },
+  'ZnO': {
+    name: 'Çinko Oksit',
+    elements: ['Zn', 'O'],
+    color: '#F9FAFB',
+    effect: 'sparkle',
+    description: 'Güneş kremi ve merhem!',
+    points: 180
+  },
+  'AgNO3': {
+    name: 'Gümüş Nitrat',
+    elements: ['Ag', 'N', 'O', 'O', 'O'],
+    color: '#D1D5DB',
+    effect: 'sparkle',
+    description: 'Fotoğrafçılıkta kullanılır!',
+    points: 300
+  },
+  'HF': {
+    name: 'Hidrojen Florür',
+    elements: ['H', 'F'],
+    color: '#10B981',
+    effect: 'vapour',
+    description: 'Cam aşındırır!',
+    points: 150
+  },
+  'HBr': {
+    name: 'Hidrojen Bromür',
+    elements: ['H', 'Br'],
+    color: '#A62929',
+    effect: 'vapour',
+    description: 'Güçlü asit!',
+    points: 160
+  },
+  'H3PO4': {
+    name: 'Fosforik Asit',
+    elements: ['H', 'H', 'H', 'P', 'O', 'O', 'O', 'O'],
+    color: '#FFA500',
+    effect: 'bubbles',
+    description: 'Kolada ve gübreleyde!',
+    points: 280
   }
 };
 
@@ -125,23 +205,14 @@ export const defaultElements = [
   { symbol: 'Ca', name: 'Kalsiyum', atomicNumber: 20, color: '#E5E7EB', textColor: '#374151' }
 ];
 
-// Tüm periyodik tablo elementleri (İlk 20)
+// Periyodik tablo elementleri (Kullanılabilir + 3 örnek kullanılamayan)
 export const allPeriodicElements = [
-  // 1. Periyot
+  // Kullanılabilir elementler (Bileşik oluşturanlar)
   { symbol: 'H', name: 'Hidrojen', atomicNumber: 1, mass: 1.008, color: '#FFFFFF', textColor: '#3B82F6', category: 'nonmetal' },
-  { symbol: 'He', name: 'Helyum', atomicNumber: 2, mass: 4.003, color: '#D9FFFF', textColor: '#0891B2', category: 'noble-gas' },
-  
-  // 2. Periyot
-  { symbol: 'Li', name: 'Lityum', atomicNumber: 3, mass: 6.941, color: '#CC80FF', textColor: '#6B21A8', category: 'alkali-metal' },
-  { symbol: 'Be', name: 'Berilyum', atomicNumber: 4, mass: 9.012, color: '#C2FF00', textColor: '#3F6212', category: 'alkaline-earth' },
-  { symbol: 'B', name: 'Bor', atomicNumber: 5, mass: 10.81, color: '#FFB5B5', textColor: '#991B1B', category: 'metalloid' },
   { symbol: 'C', name: 'Karbon', atomicNumber: 6, mass: 12.01, color: '#9CA3AF', textColor: '#111827', category: 'nonmetal' },
   { symbol: 'N', name: 'Azot', atomicNumber: 7, mass: 14.01, color: '#C4B5FD', textColor: '#5B21B6', category: 'nonmetal' },
   { symbol: 'O', name: 'Oksijen', atomicNumber: 8, mass: 16.00, color: '#BFDBFE', textColor: '#1E40AF', category: 'nonmetal' },
   { symbol: 'F', name: 'Flor', atomicNumber: 9, mass: 19.00, color: '#90EE90', textColor: '#14532D', category: 'halogen' },
-  { symbol: 'Ne', name: 'Neon', atomicNumber: 10, mass: 20.18, color: '#B3E5FC', textColor: '#0C4A6E', category: 'noble-gas' },
-  
-  // 3. Periyot
   { symbol: 'Na', name: 'Sodyum', atomicNumber: 11, mass: 22.99, color: '#FED7AA', textColor: '#9A3412', category: 'alkali-metal' },
   { symbol: 'Mg', name: 'Magnezyum', atomicNumber: 12, mass: 24.31, color: '#8AFF00', textColor: '#365314', category: 'alkaline-earth' },
   { symbol: 'Al', name: 'Alüminyum', atomicNumber: 13, mass: 26.98, color: '#BFA6A6', textColor: '#78350F', category: 'post-transition' },
@@ -149,27 +220,18 @@ export const allPeriodicElements = [
   { symbol: 'P', name: 'Fosfor', atomicNumber: 15, mass: 30.97, color: '#FF8000', textColor: '#FFFFFF', category: 'nonmetal' },
   { symbol: 'S', name: 'Sülfür', atomicNumber: 16, mass: 32.07, color: '#FEF08A', textColor: '#713F12', category: 'nonmetal' },
   { symbol: 'Cl', name: 'Klor', atomicNumber: 17, mass: 35.45, color: '#86EFAC', textColor: '#14532D', category: 'halogen' },
-  { symbol: 'Ar', name: 'Argon', atomicNumber: 18, mass: 39.95, color: '#80D4FF', textColor: '#0C4A6E', category: 'noble-gas' },
-  
-  // 4. Periyot
   { symbol: 'K', name: 'Potasyum', atomicNumber: 19, mass: 39.10, color: '#8F40D4', textColor: '#FFFFFF', category: 'alkali-metal' },
   { symbol: 'Ca', name: 'Kalsiyum', atomicNumber: 20, mass: 40.08, color: '#E5E7EB', textColor: '#374151', category: 'alkaline-earth' },
-  { symbol: 'Sc', name: 'Skandiyum', atomicNumber: 21, mass: 44.96, color: '#E0E0E0', textColor: '#1F2937', category: 'transition-metal' },
-  { symbol: 'Ti', name: 'Titanyum', atomicNumber: 22, mass: 47.87, color: '#BFC2C7', textColor: '#1F2937', category: 'transition-metal' },
-  { symbol: 'V', name: 'Vanadyum', atomicNumber: 23, mass: 50.94, color: '#A6A6AB', textColor: '#FFFFFF', category: 'transition-metal' },
-  { symbol: 'Cr', name: 'Krom', atomicNumber: 24, mass: 52.00, color: '#8A99C7', textColor: '#FFFFFF', category: 'transition-metal' },
-  { symbol: 'Mn', name: 'Manganez', atomicNumber: 25, mass: 54.94, color: '#9C7AC7', textColor: '#FFFFFF', category: 'transition-metal' },
   { symbol: 'Fe', name: 'Demir', atomicNumber: 26, mass: 55.85, color: '#E06633', textColor: '#FFFFFF', category: 'transition-metal' },
-  { symbol: 'Co', name: 'Kobalt', atomicNumber: 27, mass: 58.93, color: '#F090A0', textColor: '#1F2937', category: 'transition-metal' },
-  { symbol: 'Ni', name: 'Nikel', atomicNumber: 28, mass: 58.69, color: '#50D050', textColor: '#1F2937', category: 'transition-metal' },
   { symbol: 'Cu', name: 'Bakır', atomicNumber: 29, mass: 63.55, color: '#C88033', textColor: '#FFFFFF', category: 'transition-metal' },
   { symbol: 'Zn', name: 'Çinko', atomicNumber: 30, mass: 65.38, color: '#7D80B0', textColor: '#FFFFFF', category: 'transition-metal' },
-  { symbol: 'Ga', name: 'Galyum', atomicNumber: 31, mass: 69.72, color: '#C28F8F', textColor: '#1F2937', category: 'post-transition' },
-  { symbol: 'Ge', name: 'Germanyum', atomicNumber: 32, mass: 72.63, color: '#668F8F', textColor: '#FFFFFF', category: 'metalloid' },
-  { symbol: 'As', name: 'Arsenik', atomicNumber: 33, mass: 74.92, color: '#BD80E3', textColor: '#1F2937', category: 'metalloid' },
-  { symbol: 'Se', name: 'Selenyum', atomicNumber: 34, mass: 78.97, color: '#FFA100', textColor: '#1F2937', category: 'nonmetal' },
   { symbol: 'Br', name: 'Brom', atomicNumber: 35, mass: 79.90, color: '#A62929', textColor: '#FFFFFF', category: 'halogen' },
-  { symbol: 'Kr', name: 'Kripton', atomicNumber: 36, mass: 83.80, color: '#5CB8D1', textColor: '#1F2937', category: 'noble-gas' },
+  { symbol: 'Ag', name: 'Gümüş', atomicNumber: 47, mass: 107.87, color: '#C0C0C0', textColor: '#1F2937', category: 'transition-metal' },
+  
+  // Kullanılamayan elementler (Örnekler - Eğitim amaçlı)
+  { symbol: 'He', name: 'Helyum', atomicNumber: 2, mass: 4.003, color: '#D9FFFF', textColor: '#0891B2', category: 'noble-gas' },
+  { symbol: 'Ne', name: 'Neon', atomicNumber: 10, mass: 20.18, color: '#B3E5FC', textColor: '#0C4A6E', category: 'noble-gas' },
+  { symbol: 'Ar', name: 'Argon', atomicNumber: 18, mass: 39.95, color: '#80D4FF', textColor: '#0C4A6E', category: 'noble-gas' },
 ];
 
 // Reaksiyonlarda kullanılan elementleri otomatik topla

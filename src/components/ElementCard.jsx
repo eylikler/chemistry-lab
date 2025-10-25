@@ -1,7 +1,8 @@
+import React from 'react';
 import { useDraggable } from '@dnd-kit/core';
 import { motion } from 'framer-motion';
 
-const ElementCard = ({ element }) => {
+const ElementCard = ({ element, onClick }) => {
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
     id: element.symbol,
     data: element,
@@ -15,12 +16,17 @@ const ElementCard = ({ element }) => {
       }
     : undefined;
 
+  const handleAddClick = (e) => {
+    e.stopPropagation();
+    if (onClick) {
+      onClick(element);
+    }
+  };
+
   return (
     <motion.div
       ref={setNodeRef}
       style={style}
-      {...listeners}
-      {...attributes}
       className="element-card"
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
@@ -29,6 +35,8 @@ const ElementCard = ({ element }) => {
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
     >
       <div
+        {...listeners}
+        {...attributes}
         className="element-card-inner"
         style={{
           backgroundColor: element.color,
@@ -39,6 +47,15 @@ const ElementCard = ({ element }) => {
         <div className="element-symbol">{element.symbol}</div>
         <div className="element-name">{element.name}</div>
       </div>
+      
+      {/* Ekle butonu - DnD'den bağımsız */}
+      <button 
+        className="element-add-btn"
+        onClick={handleAddClick}
+        title="Beaker'a ekle"
+      >
+        +
+      </button>
     </motion.div>
   );
 };
