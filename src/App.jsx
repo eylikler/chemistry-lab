@@ -6,6 +6,7 @@ import ElementCard from './components/ElementCard';
 import Beaker from './components/Beaker';
 import ReactionDisplay from './components/ReactionDisplay';
 import ParticleEffect from './components/ParticleEffect';
+import PeriodicTable from './components/PeriodicTable';
 import { elements, reactions } from './reactions';
 import './App.css';
 
@@ -18,6 +19,7 @@ function App() {
   const [currentEffect, setCurrentEffect] = useState(null);
   const [showInstructions, setShowInstructions] = useState(true);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [showPeriodicTable, setShowPeriodicTable] = useState(false);
 
   // Ses efektleri
   const playSound = (type) => {
@@ -376,12 +378,18 @@ function App() {
           className="reference-btn"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          onClick={() =>
-            toast('Periyodik Tablo özelliği yakında eklenecek!', { icon: '📊' })
-          }
+          onClick={() => setShowPeriodicTable(true)}
+          title="Periyodik Tabloyu Aç"
         >
           📊
         </motion.button>
+
+        {/* Periyodik Tablo Modal */}
+        <PeriodicTable
+          isOpen={showPeriodicTable}
+          onClose={() => setShowPeriodicTable(false)}
+          elements={elements}
+        />
       </div>
     </DndContext>
   );
