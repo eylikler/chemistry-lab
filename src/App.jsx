@@ -64,6 +64,25 @@ function App() {
   };
 
   // Sürükleme bittiğinde
+  // Element tıklama ile ekleme
+  const handleElementClick = (element) => {
+    if (beakerElements.length >= 25) {
+      toast.error('Beaker dolu! Maximum 25 element eklenebilir.', {
+        icon: '⚠️',
+        duration: 2000,
+      });
+      return;
+    }
+
+    setBeakerElements([...beakerElements, element.symbol]);
+    playSound('drop');
+    
+    toast.success(`${element.name} eklendi!`, {
+      icon: '✅',
+      duration: 1500,
+    });
+  };
+
   const handleDragEnd = (event) => {
     const { active, over } = event;
     setActiveElement(null);
@@ -317,14 +336,14 @@ function App() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.3 + index * 0.05 }}
                 >
-                  <ElementCard element={element} />
+                  <ElementCard element={element} onClick={() => handleElementClick(element)} />
                 </motion.div>
               ))}
             </div>
             <div className="instructions-box">
               <p>💡 <strong>Nasıl Oynanır:</strong></p>
               <ol>
-                <li>Elementleri beaker'a sürükleyin</li>
+                <li><strong>Tıklayın</strong> veya <strong>sürükleyin</strong></li>
                 <li>"Karıştır" butonuna basın</li>
                 <li>Doğru kombinasyonları keşfedin!</li>
               </ol>
