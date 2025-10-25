@@ -2134,12 +2134,12 @@ body {
 /* Bileşikler Butonu */
 .compounds-btn {
   position: fixed;
-  bottom: 8rem;
+  bottom: 10rem;
   right: 2rem;
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   border: 3px solid white;
   font-size: 1.5rem;
   cursor: pointer;
@@ -2209,7 +2209,7 @@ body {
   }
 
   .compounds-btn {
-    bottom: 6rem;
+    bottom: 8rem;
     right: 1rem;
     width: 50px;
     height: 50px;
