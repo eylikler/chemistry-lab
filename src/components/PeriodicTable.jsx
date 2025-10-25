@@ -7,13 +7,10 @@ const PeriodicTable = ({ isOpen, onClose, availableElements, allElements, onTogg
   const usableElements = getUsableElements();
   
 
-  // Grid pozisyonları için periyot ve grup bilgileri
+  // Grid pozisyonları
   const gridPositions = {
     'H': { group: 1, period: 1 },
     'He': { group: 18, period: 1 },
-    'Li': { group: 1, period: 2 },
-    'Be': { group: 2, period: 2 },
-    'B': { group: 13, period: 2 },
     'C': { group: 14, period: 2 },
     'N': { group: 15, period: 2 },
     'O': { group: 16, period: 2 },
@@ -29,22 +26,11 @@ const PeriodicTable = ({ isOpen, onClose, availableElements, allElements, onTogg
     'Ar': { group: 18, period: 3 },
     'K': { group: 1, period: 4 },
     'Ca': { group: 2, period: 4 },
-    'Sc': { group: 3, period: 4 },
-    'Ti': { group: 4, period: 4 },
-    'V': { group: 5, period: 4 },
-    'Cr': { group: 6, period: 4 },
-    'Mn': { group: 7, period: 4 },
     'Fe': { group: 8, period: 4 },
-    'Co': { group: 9, period: 4 },
-    'Ni': { group: 10, period: 4 },
     'Cu': { group: 11, period: 4 },
     'Zn': { group: 12, period: 4 },
-    'Ga': { group: 13, period: 4 },
-    'Ge': { group: 14, period: 4 },
-    'As': { group: 15, period: 4 },
-    'Se': { group: 16, period: 4 },
     'Br': { group: 17, period: 4 },
-    'Kr': { group: 18, period: 4 },
+    'Ag': { group: 11, period: 5 },
   };
 
   // Ana ekranda olup olmadığını kontrol et

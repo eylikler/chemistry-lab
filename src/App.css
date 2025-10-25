@@ -977,12 +977,12 @@ body {
 .periodic-table-grid {
   display: grid;
   grid-template-columns: repeat(18, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
   gap: 0.25rem;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
-  min-height: 280px;
-  max-height: 300px;
+  min-height: 320px;
+  max-height: 350px;
   overflow: visible;
 }
 
