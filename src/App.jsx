@@ -8,6 +8,7 @@ import ReactionDisplay from './components/ReactionDisplay';
 import ParticleEffect from './components/ParticleEffect';
 import PeriodicTable from './components/PeriodicTable';
 import CompoundDetailModal from './components/CompoundDetailModal';
+import CompoundVisualization from './components/CompoundVisualization';
 import { defaultElements, allPeriodicElements, reactions } from './reactions';
 import './App.css';
 
@@ -26,6 +27,7 @@ function App() {
   const [selectedCompound, setSelectedCompound] = useState(null);
   const [showCompoundModal, setShowCompoundModal] = useState(false);
   const [showExplosion, setShowExplosion] = useState(false);
+  const [showCompoundViz, setShowCompoundViz] = useState(false);
 
   // Ses efektleri
   const playSound = (type) => {
@@ -458,6 +460,17 @@ function App() {
           )}
         </AnimatePresence>
 
+        {/* Bileşikler butonu */}
+        <motion.button
+          className="compounds-btn"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => setShowCompoundViz(true)}
+          title="Bileşik Moleküllerini Gör"
+        >
+          🧬
+        </motion.button>
+
         {/* Periyodik tablo referans butonu */}
         <motion.button
           className="reference-btn"
@@ -468,6 +481,13 @@ function App() {
         >
           📊
         </motion.button>
+
+        {/* Bileşik Görselleştirme Modal */}
+        <CompoundVisualization
+          isOpen={showCompoundViz}
+          onClose={() => setShowCompoundViz(false)}
+          compounds={reactions}
+        />
 
         {/* Periyodik Tablo Modal */}
         <PeriodicTable
