@@ -102,39 +102,44 @@ const ParticleEffect = ({ effect, onComplete }) => {
 
   const getBubblesConfig = () => ({
     key: 'bubbles',
-    fullScreen: false,
+    fullScreen: true,
     background: {
       color: 'transparent',
     },
     particles: {
       number: {
-        value: 30,
+        value: 50,
+        density: {
+          enable: true,
+          area: 800,
+        },
       },
       color: {
-        value: '#3B82F6',
+        value: ['#3B82F6', '#60A5FA', '#93C5FD'],
       },
       shape: {
         type: 'circle',
       },
       opacity: {
-        value: { min: 0.3, max: 0.7 },
+        value: { min: 0.4, max: 0.8 },
         animation: {
           enable: true,
-          speed: 1,
+          speed: 2,
           sync: false,
         },
       },
       size: {
-        value: { min: 10, max: 30 },
+        value: { min: 15, max: 40 },
       },
       move: {
         enable: true,
-        speed: 3,
+        speed: { min: 3, max: 6 },
         direction: 'top',
         outModes: {
           default: 'out',
           top: 'destroy',
         },
+        bounce: false,
       },
     },
     detectRetina: true,
@@ -142,55 +147,20 @@ const ParticleEffect = ({ effect, onComplete }) => {
 
   const getSmokeConfig = () => ({
     key: 'smoke',
-    fullScreen: false,
+    fullScreen: true,
     background: {
       color: 'transparent',
     },
     particles: {
       number: {
-        value: 50,
-      },
-      color: {
-        value: '#6B7280',
-      },
-      shape: {
-        type: 'circle',
-      },
-      opacity: {
-        value: { min: 0.1, max: 0.5 },
-        animation: {
+        value: 80,
+        density: {
           enable: true,
-          speed: 1,
-          sync: false,
+          area: 800,
         },
-      },
-      size: {
-        value: { min: 20, max: 40 },
-      },
-      move: {
-        enable: true,
-        speed: 2,
-        direction: 'top-right',
-        outModes: {
-          default: 'out',
-        },
-      },
-    },
-    detectRetina: true,
-  });
-
-  const getVapourConfig = () => ({
-    key: 'vapour',
-    fullScreen: false,
-    background: {
-      color: 'transparent',
-    },
-    particles: {
-      number: {
-        value: 40,
       },
       color: {
-        value: '#8B5CF6',
+        value: ['#6B7280', '#9CA3AF', '#4B5563'],
       },
       shape: {
         type: 'circle',
@@ -199,21 +169,65 @@ const ParticleEffect = ({ effect, onComplete }) => {
         value: { min: 0.2, max: 0.6 },
         animation: {
           enable: true,
+          speed: 1.5,
+          sync: false,
+        },
+      },
+      size: {
+        value: { min: 25, max: 50 },
+      },
+      move: {
+        enable: true,
+        speed: { min: 2, max: 4 },
+        direction: 'top',
+        outModes: {
+          default: 'out',
+        },
+        random: true,
+      },
+    },
+    detectRetina: true,
+  });
+
+  const getVapourConfig = () => ({
+    key: 'vapour',
+    fullScreen: true,
+    background: {
+      color: 'transparent',
+    },
+    particles: {
+      number: {
+        value: 60,
+        density: {
+          enable: true,
+          area: 800,
+        },
+      },
+      color: {
+        value: ['#8B5CF6', '#A78BFA', '#C4B5FD'],
+      },
+      shape: {
+        type: 'circle',
+      },
+      opacity: {
+        value: { min: 0.3, max: 0.7 },
+        animation: {
+          enable: true,
           speed: 2,
           sync: false,
         },
       },
       size: {
-        value: { min: 15, max: 35 },
+        value: { min: 20, max: 45 },
       },
       move: {
         enable: true,
-        speed: { min: 1, max: 3 },
+        speed: { min: 2, max: 5 },
         direction: 'top',
         outModes: {
           default: 'out',
         },
-        warp: true,
+        random: true,
       },
     },
     detectRetina: true,
@@ -221,34 +235,43 @@ const ParticleEffect = ({ effect, onComplete }) => {
 
   const getCrystallizeConfig = () => ({
     key: 'crystallize',
-    fullScreen: false,
+    fullScreen: true,
     background: {
       color: 'transparent',
     },
     particles: {
       number: {
-        value: 60,
+        value: 100,
+        density: {
+          enable: true,
+          area: 800,
+        },
       },
       color: {
-        value: ['#E5E7EB', '#F3F4F6', '#FFFFFF'],
+        value: ['#E5E7EB', '#F3F4F6', '#FFFFFF', '#D1D5DB'],
       },
       shape: {
-        type: ['circle', 'square', 'triangle'],
+        type: ['circle', 'square', 'triangle', 'polygon'],
+        options: {
+          polygon: {
+            sides: 6,
+          },
+        },
       },
       opacity: {
-        value: { min: 0.4, max: 0.8 },
+        value: { min: 0.5, max: 0.9 },
         animation: {
           enable: true,
-          speed: 1,
+          speed: 1.5,
           sync: false,
         },
       },
       size: {
-        value: { min: 5, max: 15 },
+        value: { min: 8, max: 20 },
       },
       move: {
         enable: true,
-        speed: 1,
+        speed: { min: 1, max: 3 },
         direction: 'bottom',
         outModes: {
           default: 'out',
@@ -258,7 +281,7 @@ const ParticleEffect = ({ effect, onComplete }) => {
         value: { min: 0, max: 360 },
         animation: {
           enable: true,
-          speed: 5,
+          speed: 8,
           sync: false,
         },
       },
