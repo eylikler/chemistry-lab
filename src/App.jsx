@@ -25,6 +25,7 @@ function App() {
   const [activeElement, setActiveElement] = useState(null);
   const [selectedCompound, setSelectedCompound] = useState(null);
   const [showCompoundModal, setShowCompoundModal] = useState(false);
+  const [showExplosion, setShowExplosion] = useState(false);
 
   // Ses efektleri
   const playSound = (type) => {
@@ -161,12 +162,27 @@ function App() {
       setIsSuccess(true);
       playSound('success');
 
-      // Animasyonu temizle
+      // Tehlikeli bileşik kontrolü
+      if (foundReaction.effect === 'dangerous') {
+        setShowExplosion(true);
+        setTimeout(() => setShowExplosion(false), 3000);
+        // Tehlikeli bileşikler için elementleri biraz daha geç temizle
+        setTimeout(() => {
+          setBeakerElements([]);
+          setLiquidColor('#BFDBFE');
+        }, 3500);
+      } else {
+        // Normal bileşikler için elementleri hemen temizle
+        setTimeout(() => {
+          setBeakerElements([]);
+          setLiquidColor('#BFDBFE');
+        }, 2000);
+      }
+
+      // Efekt animasyonunu temizle
       setTimeout(() => {
         setCurrentEffect(null);
         setIsSuccess(false);
-        setBeakerElements([]);
-        setLiquidColor('#BFDBFE');
       }, 2500);
     } else {
       // Başarısız reaksiyon
@@ -474,6 +490,69 @@ function App() {
           isOpen={showCompoundModal}
           onClose={closeCompoundModal}
         />
+
+        {/* Patlama Efekti */}
+        <AnimatePresence>
+          {showExplosion && (
+            <motion.div
+              className="explosion-overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <motion.div
+                className="explosion-flash"
+                initial={{ scale: 0, opacity: 1 }}
+                animate={{ 
+                  scale: [0, 1.5, 3, 5],
+                  opacity: [1, 0.8, 0.4, 0]
+                }}
+                transition={{ duration: 3, times: [0, 0.3, 0.6, 1] }}
+              />
+              <motion.div
+                className="explosion-warning"
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                exit={{ scale: 0, rotate: 180 }}
+                transition={{ type: 'spring', stiffness: 200, damping: 15 }}
+              >
+                <div className="warning-icon">⚠️</div>
+                <div className="warning-text">TEHLİKELİ BİLEŞİK!</div>
+                <div className="warning-subtext">Güvenli mesafede kalın!</div>
+              </motion.div>
+              <motion.div
+                className="explosion-particles"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                {[...Array(20)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="explosion-particle"
+                    initial={{
+                      x: '50vw',
+                      y: '50vh',
+                      scale: 1,
+                    }}
+                    animate={{
+                      x: `${Math.random() * 100}vw`,
+                      y: `${Math.random() * 100}vh`,
+                      scale: [1, 0],
+                      rotate: Math.random() * 360,
+                    }}
+                    transition={{
+                      duration: 2,
+                      delay: i * 0.05,
+                      ease: 'easeOut',
+                    }}
+                  />
+                ))}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </DndContext>
   );

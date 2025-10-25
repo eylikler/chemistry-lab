@@ -28,18 +28,20 @@ const ReactionDisplay = ({ discoveredCompounds, onCompoundClick }) => {
               <motion.div
                 key={compound.formula}
                 className="compound-card clickable"
-                initial={{ x: 300, opacity: 0, scale: 0.8 }}
-                animate={{ x: 0, opacity: 1, scale: 1 }}
-                exit={{ x: 300, opacity: 0 }}
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: -20 }}
                 transition={{
-                  type: 'spring',
-                  stiffness: 200,
-                  damping: 20,
+                  duration: 0.4,
+                  ease: [0.4, 0, 0.2, 1],
                   delay: index * 0.1,
                 }}
-                whileHover={{ scale: 1.05, y: -5 }}
+                whileHover={{ scale: 1.03, y: -3 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => onCompoundClick(compound)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onCompoundClick(compound);
+                }}
               >
                 <div className="compound-header">
                   <div
