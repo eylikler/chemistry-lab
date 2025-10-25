@@ -1,10 +1,29 @@
 import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { getUsableElements, elementRestrictions } from '../reactions';
 
 const PeriodicTable = ({ isOpen, onClose, availableElements, allElements, onToggleElement }) => {
   // Kullanılabilir elementler
   const usableElements = getUsableElements();
+  
+  // Sayfa durumu
+  const [currentPage, setCurrentPage] = useState(1);
+  // Sayfa 1: İlk 3 periyot + 4. periyodun ilk kısmı
+  const page1Elements = ['H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 
+                         'Na', 'Mg', 'Al', 'Si', 'P', 'S', 'Cl', 'Ar',
+                         'K', 'Ca', 'Sc', 'Ti', 'V', 'Cr', 'Mn', 'Fe'];
+  
+  // Sayfa 2: 4. periyodun geri kalanı
+  const page2Elements = ['H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne',
+                         'Na', 'Mg', 'Al', 'Si', 'P', 'S', 'Cl', 'Ar',
+                         'K', 'Ca', 'Co', 'Ni', 'Cu', 'Zn', 'Ga', 'Ge', 'As', 'Se', 'Br', 'Kr'];
+  
+  // Mevcut sayfaya göre gösterilecek elementler
+  const visibleElements = currentPage === 1 
+    ? allElements.filter(el => page1Elements.includes(el.symbol))
+    : allElements.filter(el => page2Elements.includes(el.symbol));
+
   // Grid pozisyonları için periyot ve grup bilgileri
   const gridPositions = {
     'H': { group: 1, period: 1 },
@@ -27,6 +46,22 @@ const PeriodicTable = ({ isOpen, onClose, availableElements, allElements, onTogg
     'Ar': { group: 18, period: 3 },
     'K': { group: 1, period: 4 },
     'Ca': { group: 2, period: 4 },
+    'Sc': { group: 3, period: 4 },
+    'Ti': { group: 4, period: 4 },
+    'V': { group: 5, period: 4 },
+    'Cr': { group: 6, period: 4 },
+    'Mn': { group: 7, period: 4 },
+    'Fe': { group: 8, period: 4 },
+    'Co': { group: 9, period: 4 },
+    'Ni': { group: 10, period: 4 },
+    'Cu': { group: 11, period: 4 },
+    'Zn': { group: 12, period: 4 },
+    'Ga': { group: 13, period: 4 },
+    'Ge': { group: 14, period: 4 },
+    'As': { group: 15, period: 4 },
+    'Se': { group: 16, period: 4 },
+    'Br': { group: 17, period: 4 },
+    'Kr': { group: 18, period: 4 },
   };
 
   // Ana ekranda olup olmadığını kontrol et
@@ -48,6 +83,7 @@ const PeriodicTable = ({ isOpen, onClose, availableElements, allElements, onTogg
     'metalloid': '#8b5cf6',
     'halogen': '#14b8a6',
     'post-transition': '#6366f1',
+    'transition-metal': '#ef4444',
   };
 
   const categoryNames = {
@@ -58,6 +94,7 @@ const PeriodicTable = ({ isOpen, onClose, availableElements, allElements, onTogg
     'metalloid': 'Yarı Metal',
     'halogen': 'Halojen',
     'post-transition': 'Geçiş Sonrası',
+    'transition-metal': 'Geçiş Metali',
   };
 
   // Grid pozisyonu hesapla
@@ -148,7 +185,7 @@ const PeriodicTable = ({ isOpen, onClose, availableElements, allElements, onTogg
 
             {/* Periyodik Tablo Grid */}
             <div className="periodic-table-grid">
-              {allElements.map((element) => {
+              {visibleElements.map((element) => {
                 const usable = isUsable(element.symbol);
                 const available = isAvailable(element.symbol);
                 
@@ -184,6 +221,25 @@ const PeriodicTable = ({ isOpen, onClose, availableElements, allElements, onTogg
                   </motion.div>
                 );
               })}
+            </div>
+
+            {/* Sayfalama Butonları */}
+            <div className="pagination-controls">
+              <button
+                className={`page-btn ${currentPage === 1 ? 'active' : ''}`}
+                onClick={() => setCurrentPage(1)}
+              >
+                1
+              </button>
+              <button
+                className={`page-btn ${currentPage === 2 ? 'active' : ''}`}
+                onClick={() => setCurrentPage(2)}
+              >
+                2
+              </button>
+              <span className="page-info">
+                {currentPage === 1 ? 'İlk 3 Periyot + Geçiş Metali' : '4. Periyot Devamı'}
+              </span>
             </div>
 
             {/* Kategori Lejantı */}

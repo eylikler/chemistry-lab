@@ -151,9 +151,25 @@ export const allPeriodicElements = [
   { symbol: 'Cl', name: 'Klor', atomicNumber: 17, mass: 35.45, color: '#86EFAC', textColor: '#14532D', category: 'halogen' },
   { symbol: 'Ar', name: 'Argon', atomicNumber: 18, mass: 39.95, color: '#80D4FF', textColor: '#0C4A6E', category: 'noble-gas' },
   
-  // 4. Periyot (İlk kısmı)
+  // 4. Periyot
   { symbol: 'K', name: 'Potasyum', atomicNumber: 19, mass: 39.10, color: '#8F40D4', textColor: '#FFFFFF', category: 'alkali-metal' },
   { symbol: 'Ca', name: 'Kalsiyum', atomicNumber: 20, mass: 40.08, color: '#E5E7EB', textColor: '#374151', category: 'alkaline-earth' },
+  { symbol: 'Sc', name: 'Skandiyum', atomicNumber: 21, mass: 44.96, color: '#E0E0E0', textColor: '#1F2937', category: 'transition-metal' },
+  { symbol: 'Ti', name: 'Titanyum', atomicNumber: 22, mass: 47.87, color: '#BFC2C7', textColor: '#1F2937', category: 'transition-metal' },
+  { symbol: 'V', name: 'Vanadyum', atomicNumber: 23, mass: 50.94, color: '#A6A6AB', textColor: '#FFFFFF', category: 'transition-metal' },
+  { symbol: 'Cr', name: 'Krom', atomicNumber: 24, mass: 52.00, color: '#8A99C7', textColor: '#FFFFFF', category: 'transition-metal' },
+  { symbol: 'Mn', name: 'Manganez', atomicNumber: 25, mass: 54.94, color: '#9C7AC7', textColor: '#FFFFFF', category: 'transition-metal' },
+  { symbol: 'Fe', name: 'Demir', atomicNumber: 26, mass: 55.85, color: '#E06633', textColor: '#FFFFFF', category: 'transition-metal' },
+  { symbol: 'Co', name: 'Kobalt', atomicNumber: 27, mass: 58.93, color: '#F090A0', textColor: '#1F2937', category: 'transition-metal' },
+  { symbol: 'Ni', name: 'Nikel', atomicNumber: 28, mass: 58.69, color: '#50D050', textColor: '#1F2937', category: 'transition-metal' },
+  { symbol: 'Cu', name: 'Bakır', atomicNumber: 29, mass: 63.55, color: '#C88033', textColor: '#FFFFFF', category: 'transition-metal' },
+  { symbol: 'Zn', name: 'Çinko', atomicNumber: 30, mass: 65.38, color: '#7D80B0', textColor: '#FFFFFF', category: 'transition-metal' },
+  { symbol: 'Ga', name: 'Galyum', atomicNumber: 31, mass: 69.72, color: '#C28F8F', textColor: '#1F2937', category: 'post-transition' },
+  { symbol: 'Ge', name: 'Germanyum', atomicNumber: 32, mass: 72.63, color: '#668F8F', textColor: '#FFFFFF', category: 'metalloid' },
+  { symbol: 'As', name: 'Arsenik', atomicNumber: 33, mass: 74.92, color: '#BD80E3', textColor: '#1F2937', category: 'metalloid' },
+  { symbol: 'Se', name: 'Selenyum', atomicNumber: 34, mass: 78.97, color: '#FFA100', textColor: '#1F2937', category: 'nonmetal' },
+  { symbol: 'Br', name: 'Brom', atomicNumber: 35, mass: 79.90, color: '#A62929', textColor: '#FFFFFF', category: 'halogen' },
+  { symbol: 'Kr', name: 'Kripton', atomicNumber: 36, mass: 83.80, color: '#5CB8D1', textColor: '#1F2937', category: 'noble-gas' },
 ];
 
 // Reaksiyonlarda kullanılan elementleri otomatik topla
@@ -172,6 +188,7 @@ export const elementRestrictions = {
   'He': 'Helyum soy gazdır ve başka elementlerle bileşik oluşturmaz. Elektron kabukları tamamen doludur.',
   'Ne': 'Neon soy gazdır ve kimyasal reaksiyona girmez. Doğada tek başına bulunur.',
   'Ar': 'Argon soy gazdır ve diğer elementlerle tepkime vermez. Çok kararlı bir yapıya sahiptir.',
+  'Kr': 'Kripton soy gazdır ve kimyasal olarak inert (etkisiz) bir elementtir.',
   'Li': 'Lityum çok reaktiftir ve su ile patlayıcı reaksiyon verir. Güvenlik nedeniyle henüz desteklenmiyor.',
   'Be': 'Berilyum ve bileşikleri zehirlidir. Sağlık riski nedeniyle şu an için desteklenmiyor.',
   'B': 'Bor ile bilinen bileşikler (borik asit gibi) henüz veritabanına eklenmedi.',
@@ -180,6 +197,21 @@ export const elementRestrictions = {
   'Si': 'Silisyum bileşikleri (SiO₂ gibi) henüz desteklenmiyor. Yakında eklenecek.',
   'P': 'Fosfor çok reaktiftir ve kendiliğinden yanabilir. Güvenlik nedeniyle beklemede.',
   'K': 'Potasyum su ile patlayıcı reaksiyon verir ve alev alır. Çok tehlikelidir.',
+  'Sc': 'Skandiyum nadir bir geçiş metalidir. Bileşikleri henüz veritabanına eklenmedi.',
+  'Ti': 'Titanyum reaksiyonları (TiO₂ gibi) gelecek güncellemelerde eklenecek.',
+  'V': 'Vanadyum endüstriyel kullanımlıdır. Eğitim amaçlı reaksiyonları henüz yok.',
+  'Cr': 'Krom bileşikleri (K₂Cr₂O₇ gibi) gelişmiş seviye olduğu için beklemede.',
+  'Mn': 'Manganez oksitleyicidir. Güvenlik nedeniyle henüz eklenmedi.',
+  'Fe': 'Demir bileşikleri (Fe₂O₃ gibi) çok yaygın! Yakında eklenecek.',
+  'Co': 'Kobalt nadir bir elementtir ve bileşikleri henüz desteklenmiyor.',
+  'Ni': 'Nikel alerjik reaksiyonlara neden olabilir. Güvenlik nedeniyle beklemede.',
+  'Cu': 'Bakır bileşikleri (CuSO₄ gibi) güzel! Gelecek güncellemelerde eklenecek.',
+  'Zn': 'Çinko bileşikleri (ZnO gibi) sağlıklı! Yakında eklenecek.',
+  'Ga': 'Galyum metal olmasına rağmen el sıcaklığında erir. Henüz desteklenmiyor.',
+  'Ge': 'Germanyum yarı iletkendir. Elektronik amaçlı kullanılır, reaksiyonları yok.',
+  'As': 'Arsenik ZEHİRLİDİR! Sağlık riski nedeniyle kesinlikle devre dışı.',
+  'Se': 'Selenyum az miktarda faydalı ama çok zehirlidir. Güvenlik nedeniyle yok.',
+  'Br': 'Brom sıvı bir haloj endir ve çok tehlikelidir. Yakıcı buharı vardır.',
 };
 
 // Toplam bileşik sayısını hesapla

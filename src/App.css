@@ -979,8 +979,10 @@ body {
   grid-template-columns: repeat(18, 1fr);
   grid-template-rows: repeat(4, 1fr);
   gap: 0.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   min-height: 400px;
+  max-height: 450px;
+  overflow: hidden;
 }
 
 .periodic-element {
@@ -1101,6 +1103,50 @@ body {
   font-size: 0.6rem;
   opacity: 0.5;
   margin-top: 0.2rem;
+}
+
+/* Sayfalama Kontrolleri */
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.page-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid #667eea;
+  background: rgba(255, 255, 255, 0.1);
+  color: #667eea;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.page-btn:hover {
+  background: rgba(102, 126, 234, 0.2);
+  transform: scale(1.1);
+}
+
+.page-btn.active {
+  background: #667eea;
+  color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.page-info {
+  color: #333;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  white-space: nowrap;
 }
 
 .periodic-table-legend {
