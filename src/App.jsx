@@ -7,10 +7,11 @@ import Beaker from './components/Beaker';
 import ReactionDisplay from './components/ReactionDisplay';
 import ParticleEffect from './components/ParticleEffect';
 import PeriodicTable from './components/PeriodicTable';
-import { elements, reactions } from './reactions';
+import { defaultElements, allPeriodicElements, reactions } from './reactions';
 import './App.css';
 
 function App() {
+  const [elements, setElements] = useState(defaultElements);
   const [beakerElements, setBeakerElements] = useState([]);
   const [liquidColor, setLiquidColor] = useState('#BFDBFE');
   const [discoveredCompounds, setDiscoveredCompounds] = useState([]);
@@ -182,7 +183,39 @@ function App() {
       setLiquidColor('#BFDBFE');
       setDiscoveredCompounds([]);
       setScore(0);
+      setElements(defaultElements);
       toast.success('Oyun sıfırlandı!', { icon: '🔄' });
+    }
+  };
+
+  // Element ekle/çıkar
+  const toggleElement = (periodicElement) => {
+    const exists = elements.some(el => el.symbol === periodicElement.symbol);
+    
+    if (exists) {
+      // Elementi çıkar
+      const newElements = elements.filter(el => el.symbol !== periodicElement.symbol);
+      setElements(newElements);
+      toast.success(`${periodicElement.name} ana ekrandan çıkarıldı!`, {
+        icon: '➖',
+        duration: 2000,
+      });
+      playSound('drop');
+    } else {
+      // Elementi ekle
+      const newElement = {
+        symbol: periodicElement.symbol,
+        name: periodicElement.name,
+        atomicNumber: periodicElement.atomicNumber,
+        color: periodicElement.color,
+        textColor: periodicElement.textColor,
+      };
+      setElements([...elements, newElement]);
+      toast.success(`${periodicElement.name} ana ekrana eklendi!`, {
+        icon: '➕',
+        duration: 2000,
+      });
+      playSound('success');
     }
   };
 
@@ -305,7 +338,7 @@ function App() {
               >
                 🔄 Sıfırla
               </motion.button>
-            </div>
+      </div>
           </motion.section>
 
           {/* Sağ panel - Keşfedilen bileşikler */}
@@ -388,7 +421,9 @@ function App() {
         <PeriodicTable
           isOpen={showPeriodicTable}
           onClose={() => setShowPeriodicTable(false)}
-          elements={elements}
+          availableElements={elements}
+          allElements={allPeriodicElements}
+          onToggleElement={toggleElement}
         />
       </div>
     </DndContext>

@@ -881,9 +881,18 @@ body {
   color: #333;
 }
 
-.game-element-indicator {
-  color: #fbbf24;
+.available-indicator,
+.unavailable-indicator {
   font-size: 1.2rem;
+  margin: 0 0.5rem;
+}
+
+.available-indicator {
+  color: #10b981;
+}
+
+.unavailable-indicator {
+  color: #6b7280;
 }
 
 .periodic-table-grid {
@@ -916,24 +925,40 @@ body {
   transform: translateY(-5px);
 }
 
-.game-element {
-  box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
+.available-element {
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+  border-width: 4px;
 }
 
-.game-star {
+.available-element:hover {
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.7);
+}
+
+.unavailable-element {
+  opacity: 0.7;
+}
+
+.unavailable-element:hover {
+  opacity: 1;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.element-status {
   position: absolute;
   top: 2px;
   right: 2px;
   font-size: 1rem;
-  animation: sparkle 1.5s ease-in-out infinite;
+  animation: pulse 2s ease-in-out infinite;
 }
 
-@keyframes sparkle {
+@keyframes pulse {
   0%, 100% {
-    transform: scale(1) rotate(0deg);
+    transform: scale(1);
+    opacity: 1;
   }
   50% {
-    transform: scale(1.2) rotate(180deg);
+    transform: scale(1.2);
+    opacity: 0.7;
   }
 }
 

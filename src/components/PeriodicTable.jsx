@@ -1,40 +1,33 @@
 import { motion, AnimatePresence } from 'framer-motion';
 
-const PeriodicTable = ({ isOpen, onClose, elements }) => {
-  // Periyodik tablo verileri - İlk 20 element
-  const periodicElements = [
-    // 1. Periyot
-    { symbol: 'H', name: 'Hidrojen', number: 1, mass: 1.008, group: 1, period: 1, category: 'nonmetal', color: '#FFFFFF' },
-    { symbol: 'He', name: 'Helyum', number: 2, mass: 4.003, group: 18, period: 1, category: 'noble-gas', color: '#D9FFFF' },
-    
-    // 2. Periyot
-    { symbol: 'Li', name: 'Lityum', number: 3, mass: 6.941, group: 1, period: 2, category: 'alkali-metal', color: '#CC80FF' },
-    { symbol: 'Be', name: 'Berilyum', number: 4, mass: 9.012, group: 2, period: 2, category: 'alkaline-earth', color: '#C2FF00' },
-    { symbol: 'B', name: 'Bor', number: 5, mass: 10.81, group: 13, period: 2, category: 'metalloid', color: '#FFB5B5' },
-    { symbol: 'C', name: 'Karbon', number: 6, mass: 12.01, group: 14, period: 2, category: 'nonmetal', color: '#9CA3AF' },
-    { symbol: 'N', name: 'Azot', number: 7, mass: 14.01, group: 15, period: 2, category: 'nonmetal', color: '#C4B5FD' },
-    { symbol: 'O', name: 'Oksijen', number: 8, mass: 16.00, group: 16, period: 2, category: 'nonmetal', color: '#BFDBFE' },
-    { symbol: 'F', name: 'Flor', number: 9, mass: 19.00, group: 17, period: 2, category: 'halogen', color: '#90EE90' },
-    { symbol: 'Ne', name: 'Neon', number: 10, mass: 20.18, group: 18, period: 2, category: 'noble-gas', color: '#B3E5FC' },
-    
-    // 3. Periyot
-    { symbol: 'Na', name: 'Sodyum', number: 11, mass: 22.99, group: 1, period: 3, category: 'alkali-metal', color: '#FED7AA' },
-    { symbol: 'Mg', name: 'Magnezyum', number: 12, mass: 24.31, group: 2, period: 3, category: 'alkaline-earth', color: '#8AFF00' },
-    { symbol: 'Al', name: 'Alüminyum', number: 13, mass: 26.98, group: 13, period: 3, category: 'post-transition', color: '#BFA6A6' },
-    { symbol: 'Si', name: 'Silisyum', number: 14, mass: 28.09, group: 14, period: 3, category: 'metalloid', color: '#F0C8A0' },
-    { symbol: 'P', name: 'Fosfor', number: 15, mass: 30.97, group: 15, period: 3, category: 'nonmetal', color: '#FF8000' },
-    { symbol: 'S', name: 'Sülfür', number: 16, mass: 32.07, group: 16, period: 3, category: 'nonmetal', color: '#FEF08A' },
-    { symbol: 'Cl', name: 'Klor', number: 17, mass: 35.45, group: 17, period: 3, category: 'halogen', color: '#86EFAC' },
-    { symbol: 'Ar', name: 'Argon', number: 18, mass: 39.95, group: 18, period: 3, category: 'noble-gas', color: '#80D4FF' },
-    
-    // 4. Periyot (İlk kısmı)
-    { symbol: 'K', name: 'Potasyum', number: 19, mass: 39.10, group: 1, period: 4, category: 'alkali-metal', color: '#8F40D4' },
-    { symbol: 'Ca', name: 'Kalsiyum', number: 20, mass: 40.08, group: 2, period: 4, category: 'alkaline-earth', color: '#E5E7EB' },
-  ];
+const PeriodicTable = ({ isOpen, onClose, availableElements, allElements, onToggleElement }) => {
+  // Grid pozisyonları için periyot ve grup bilgileri
+  const gridPositions = {
+    'H': { group: 1, period: 1 },
+    'He': { group: 18, period: 1 },
+    'Li': { group: 1, period: 2 },
+    'Be': { group: 2, period: 2 },
+    'B': { group: 13, period: 2 },
+    'C': { group: 14, period: 2 },
+    'N': { group: 15, period: 2 },
+    'O': { group: 16, period: 2 },
+    'F': { group: 17, period: 2 },
+    'Ne': { group: 18, period: 2 },
+    'Na': { group: 1, period: 3 },
+    'Mg': { group: 2, period: 3 },
+    'Al': { group: 13, period: 3 },
+    'Si': { group: 14, period: 3 },
+    'P': { group: 15, period: 3 },
+    'S': { group: 16, period: 3 },
+    'Cl': { group: 17, period: 3 },
+    'Ar': { group: 18, period: 3 },
+    'K': { group: 1, period: 4 },
+    'Ca': { group: 2, period: 4 },
+  };
 
-  // Oyunda kullanılan elementleri işaretle
-  const isGameElement = (symbol) => {
-    return elements.some(el => el.symbol === symbol);
+  // Ana ekranda olup olmadığını kontrol et
+  const isAvailable = (symbol) => {
+    return availableElements.some(el => el.symbol === symbol);
   };
 
   // Kategori renkleri
@@ -59,11 +52,17 @@ const PeriodicTable = ({ isOpen, onClose, elements }) => {
   };
 
   // Grid pozisyonu hesapla
-  const getGridPosition = (element) => {
+  const getGridPosition = (symbol) => {
+    const pos = gridPositions[symbol];
     return {
-      gridColumn: element.group,
-      gridRow: element.period,
+      gridColumn: pos.group,
+      gridRow: pos.period,
     };
+  };
+
+  // Element tıklama işlemi
+  const handleElementClick = (element) => {
+    onToggleElement(element);
   };
 
   return (
@@ -94,29 +93,35 @@ const PeriodicTable = ({ isOpen, onClose, elements }) => {
 
             {/* Açıklama */}
             <div className="periodic-table-info">
-              <p>İlk 20 element gösterilmektedir. <span className="game-element-indicator">⭐</span> işareti oyunda kullanılan elementleri gösterir.</p>
+              <p>
+                <strong>Tıklayarak elementleri ekleyin/çıkarın!</strong><br/>
+                <span className="available-indicator">✅</span> Ana ekranda mevcut | 
+                <span className="unavailable-indicator">➕</span> Tıklayarak ekleyin
+              </p>
             </div>
 
             {/* Periyodik Tablo Grid */}
             <div className="periodic-table-grid">
-              {periodicElements.map((element) => (
+              {allElements.map((element) => (
                 <motion.div
                   key={element.symbol}
-                  className={`periodic-element ${isGameElement(element.symbol) ? 'game-element' : ''}`}
+                  className={`periodic-element ${isAvailable(element.symbol) ? 'available-element' : 'unavailable-element'}`}
                   style={{
-                    ...getGridPosition(element),
+                    ...getGridPosition(element.symbol),
                     backgroundColor: element.color,
                     borderColor: categoryColors[element.category],
                   }}
                   whileHover={{ scale: 1.1, zIndex: 10 }}
+                  whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: element.number * 0.02 }}
+                  transition={{ delay: element.atomicNumber * 0.02 }}
+                  onClick={() => handleElementClick(element)}
                 >
-                  {isGameElement(element.symbol) && (
-                    <span className="game-star">⭐</span>
-                  )}
-                  <div className="element-number">{element.number}</div>
+                  <span className="element-status">
+                    {isAvailable(element.symbol) ? '✅' : '➕'}
+                  </span>
+                  <div className="element-number">{element.atomicNumber}</div>
                   <div className="element-symbol-large">{element.symbol}</div>
                   <div className="element-name-small">{element.name}</div>
                   <div className="element-mass">{element.mass}</div>
