@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { getTotalCompounds } from '../reactions';
 
-const ReactionDisplay = ({ discoveredCompounds }) => {
+const ReactionDisplay = ({ discoveredCompounds, onCompoundClick }) => {
   const totalCompounds = getTotalCompounds();
   return (
     <div className="reaction-display">
@@ -27,7 +27,7 @@ const ReactionDisplay = ({ discoveredCompounds }) => {
             discoveredCompounds.map((compound, index) => (
               <motion.div
                 key={compound.formula}
-                className="compound-card"
+                className="compound-card clickable"
                 initial={{ x: 300, opacity: 0, scale: 0.8 }}
                 animate={{ x: 0, opacity: 1, scale: 1 }}
                 exit={{ x: 300, opacity: 0 }}
@@ -38,6 +38,8 @@ const ReactionDisplay = ({ discoveredCompounds }) => {
                   delay: index * 0.1,
                 }}
                 whileHover={{ scale: 1.05, y: -5 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => onCompoundClick(compound)}
               >
                 <div className="compound-header">
                   <div

@@ -7,6 +7,7 @@ import Beaker from './components/Beaker';
 import ReactionDisplay from './components/ReactionDisplay';
 import ParticleEffect from './components/ParticleEffect';
 import PeriodicTable from './components/PeriodicTable';
+import CompoundDetailModal from './components/CompoundDetailModal';
 import { defaultElements, allPeriodicElements, reactions } from './reactions';
 import './App.css';
 
@@ -22,6 +23,8 @@ function App() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [showPeriodicTable, setShowPeriodicTable] = useState(false);
   const [activeElement, setActiveElement] = useState(null);
+  const [selectedCompound, setSelectedCompound] = useState(null);
+  const [showCompoundModal, setShowCompoundModal] = useState(false);
 
   // Ses efektleri
   const playSound = (type) => {
@@ -228,6 +231,17 @@ function App() {
     }
   };
 
+  // Bileşik detayını aç
+  const handleCompoundClick = (compound) => {
+    setSelectedCompound(compound);
+    setShowCompoundModal(true);
+  };
+
+  const closeCompoundModal = () => {
+    setShowCompoundModal(false);
+    setTimeout(() => setSelectedCompound(null), 300);
+  };
+
   return (
     <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       <div className="app">
@@ -357,7 +371,10 @@ function App() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
-            <ReactionDisplay discoveredCompounds={discoveredCompounds} />
+            <ReactionDisplay 
+              discoveredCompounds={discoveredCompounds}
+              onCompoundClick={handleCompoundClick}
+            />
           </motion.section>
         </main>
 
@@ -450,6 +467,13 @@ function App() {
             </div>
           ) : null}
         </DragOverlay>
+
+        {/* Bileşik Detay Modalı */}
+        <CompoundDetailModal
+          compound={selectedCompound}
+          isOpen={showCompoundModal}
+          onClose={closeCompoundModal}
+        />
       </div>
     </DndContext>
   );
