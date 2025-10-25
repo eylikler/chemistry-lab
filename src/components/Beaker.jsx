@@ -48,7 +48,7 @@ const Beaker = ({ elements, liquidColor, isShaking, onRemoveElement }) => {
     return result.join('');
   };
 
-  const liquidHeight = Math.min((elements.length / 10) * 100, 80);
+  const liquidHeight = Math.min((elements.length / 25) * 100, 80);
 
   return (
     <motion.div
@@ -163,13 +163,13 @@ const Beaker = ({ elements, liquidColor, isShaking, onRemoveElement }) => {
         )}
 
         {/* Element limiti uyarısı */}
-        {elements.length >= 10 && !isOver && (
+        {elements.length >= 25 && !isOver && (
           <motion.div
             className="limit-warning"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            Maximum 10 element!
+            Maximum 25 element!
           </motion.div>
         )}
       </div>

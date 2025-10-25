@@ -10,7 +10,7 @@ Modern ve eğlenceli bir React uygulaması! Elementleri sürükle-bırak ile kar
 
 ### 🎮 Oyun Mekanikleri
 - **20 Farklı Element:** Periyodik tablodan istediğiniz elementi ekleyin!
-- **7 Keşfedilebilir Bileşik:** Su, Karbondioksit, Amonyak, Tuz, Sülfürik Asit, Kalsiyum Karbonat, Asetik Asit
+- **14 Keşfedilebilir Bileşik:** Su, Karbondioksit, Amonyak, Tuz, Sülfürik Asit, Kalsiyum Karbonat, Asetik Asit, Etanol, Metan, Hidroklorik Asit, Azot Dioksit, Sodyum Hidroksit, Magnezyum Oksit, Glikoz
 - **Puan Sistemi:** Her doğru kombinasyon puan kazandırır
 - **İlerleme Takibi:** Keşfedilen bileşikleri görüntüleyin
 
@@ -65,13 +65,25 @@ Uygulama `http://localhost:5173` adresinde çalışacaktır.
 
 ### 💡 İpuçları
 
-- **Su (H₂O):** 2 Hidrojen + 1 Oksijen
-- **Karbondioksit (CO₂):** 1 Karbon + 2 Oksijen
-- **Amonyak (NH₃):** 1 Azot + 3 Hidrojen
-- **Tuz (NaCl):** 1 Sodyum + 1 Klor
-- **Sülfürik Asit (H₂SO₄):** 2 Hidrojen + 1 Sülfür + 4 Oksijen
-- **Kalsiyum Karbonat (CaCO₃):** 1 Kalsiyum + 1 Karbon + 3 Oksijen
-- **Asetik Asit (CH₃COOH):** 1 Karbon + 3 Hidrojen + 1 Karbon + 2 Oksijen + 1 Hidrojen
+**Basit Bileşikler:**
+- **Su (H₂O):** H + H + O
+- **Karbondioksit (CO₂):** C + O + O
+- **Amonyak (NH₃):** N + H + H + H
+- **Tuz (NaCl):** Na + Cl
+- **Metan (CH₄):** C + H + H + H + H
+- **Hidroklorik Asit (HCl):** H + Cl
+
+**Orta Seviye:**
+- **Azot Dioksit (NO₂):** N + O + O
+- **Sodyum Hidroksit (NaOH):** Na + O + H
+- **Magnezyum Oksit (MgO):** Mg + O (Periyodik tablodan Mg ekleyin!)
+- **Kalsiyum Karbonat (CaCO₃):** Ca + C + O + O + O
+
+**Zorlu Bileşikler:**
+- **Sülfürik Asit (H₂SO₄):** H + H + S + O + O + O + O
+- **Asetik Asit (CH₃COOH):** C + H + H + H + C + O + O + H
+- **Etanol (C₂H₅OH):** C + C + H + H + H + H + H + O + H
+- **Glikoz (C₆H₁₂O₆):** 6C + 12H + 6O (24 element! En zor bileşik!)
 
 ## 📁 Proje Yapısı
 

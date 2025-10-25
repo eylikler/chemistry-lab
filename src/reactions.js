@@ -54,6 +54,62 @@ export const reactions = {
     effect: 'vapour',
     description: 'Sirkenin ekşi tadı!',
     points: 350
+  },
+  'C2H5OH': {
+    name: 'Etanol (Alkol)',
+    elements: ['C', 'C', 'H', 'H', 'H', 'H', 'H', 'O', 'H'],
+    color: '#06B6D4',
+    effect: 'bubbles',
+    description: 'Alkollü içeceklerde bulunan!',
+    points: 400
+  },
+  'CH4': {
+    name: 'Metan (Doğalgaz)',
+    elements: ['C', 'H', 'H', 'H', 'H'],
+    color: '#84CC16',
+    effect: 'smoke',
+    description: 'Doğalgazın ana bileşeni!',
+    points: 180
+  },
+  'HCl': {
+    name: 'Hidroklorik Asit',
+    elements: ['H', 'Cl'],
+    color: '#EAB308',
+    effect: 'vapour',
+    description: 'Kuvvetli asit!',
+    points: 150
+  },
+  'NO2': {
+    name: 'Azot Dioksit',
+    elements: ['N', 'O', 'O'],
+    color: '#DC2626',
+    effect: 'dangerous',
+    description: 'Kahverengi zehirli gaz!',
+    points: 220
+  },
+  'NaOH': {
+    name: 'Sodyum Hidroksit (Kostik)',
+    elements: ['Na', 'O', 'H'],
+    color: '#F97316',
+    effect: 'crystallize',
+    description: 'Güçlü baz, sabun yapımında!',
+    points: 200
+  },
+  'MgO': {
+    name: 'Magnezyum Oksit',
+    elements: ['Mg', 'O'],
+    color: '#F3F4F6',
+    effect: 'sparkle',
+    description: 'Beyaz parlak toz!',
+    points: 170
+  },
+  'C6H12O6': {
+    name: 'Glikoz (Şeker)',
+    elements: ['C', 'C', 'C', 'C', 'C', 'C', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'O', 'O', 'O', 'O', 'O', 'O'],
+    color: '#FDE047',
+    effect: 'crystallize',
+    description: 'Enerji kaynağımız!',
+    points: 500
   }
 };
 
@@ -99,4 +155,7 @@ export const allPeriodicElements = [
   { symbol: 'K', name: 'Potasyum', atomicNumber: 19, mass: 39.10, color: '#8F40D4', textColor: '#FFFFFF', category: 'alkali-metal' },
   { symbol: 'Ca', name: 'Kalsiyum', atomicNumber: 20, mass: 40.08, color: '#E5E7EB', textColor: '#374151', category: 'alkaline-earth' },
 ];
+
+// Toplam bileşik sayısını hesapla
+export const getTotalCompounds = () => Object.keys(reactions).length;
 

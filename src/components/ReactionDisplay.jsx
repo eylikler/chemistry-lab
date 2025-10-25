@@ -1,11 +1,13 @@
 import { motion, AnimatePresence } from 'framer-motion';
+import { getTotalCompounds } from '../reactions';
 
 const ReactionDisplay = ({ discoveredCompounds }) => {
+  const totalCompounds = getTotalCompounds();
   return (
     <div className="reaction-display">
       <h3 className="section-title">
         🔬 Keşfedilen Bileşikler
-        <span className="count-badge">{discoveredCompounds.length}/7</span>
+        <span className="count-badge">{discoveredCompounds.length}/{totalCompounds}</span>
       </h3>
 
       <div className="compounds-list">
@@ -71,17 +73,17 @@ const ReactionDisplay = ({ discoveredCompounds }) => {
               className="progress-fill"
               initial={{ width: 0 }}
               animate={{
-                width: `${(discoveredCompounds.length / 7) * 100}%`,
+                width: `${(discoveredCompounds.length / totalCompounds) * 100}%`,
               }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
             />
           </div>
           <div className="progress-text">
-            {discoveredCompounds.length === 7 ? (
+            {discoveredCompounds.length === totalCompounds ? (
               <span className="complete-text">🎉 Tüm bileşikler keşfedildi!</span>
             ) : (
               <span>
-                {7 - discoveredCompounds.length} bileşik daha keşfet!
+                {totalCompounds - discoveredCompounds.length} bileşik daha keşfet!
               </span>
             )}
           </div>

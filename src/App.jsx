@@ -65,8 +65,8 @@ function App() {
     setActiveElement(null);
 
     if (over && over.id === 'beaker') {
-      if (beakerElements.length >= 10) {
-        toast.error('Beaker dolu! Maximum 10 element ekleyebilirsiniz.', {
+      if (beakerElements.length >= 25) {
+        toast.error('Beaker dolu! Maximum 25 element ekleyebilirsiniz.', {
           icon: '⚠️',
         });
         playSound('error');
