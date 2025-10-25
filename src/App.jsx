@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { DndContext } from '@dnd-kit/core';
+import { DndContext, DragOverlay } from '@dnd-kit/core';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast, { Toaster } from 'react-hot-toast';
 import ElementCard from './components/ElementCard';
@@ -21,6 +21,7 @@ function App() {
   const [showInstructions, setShowInstructions] = useState(true);
   const [isSuccess, setIsSuccess] = useState(false);
   const [showPeriodicTable, setShowPeriodicTable] = useState(false);
+  const [activeElement, setActiveElement] = useState(null);
 
   // Ses efektleri
   const playSound = (type) => {
@@ -51,9 +52,17 @@ function App() {
     }
   };
 
-  // Sürükle-bırak işlemi
+  // Sürükleme başladığında
+  const handleDragStart = (event) => {
+    const { active } = event;
+    const element = elements.find((el) => el.symbol === active.id);
+    setActiveElement(element);
+  };
+
+  // Sürükleme bittiğinde
   const handleDragEnd = (event) => {
     const { active, over } = event;
+    setActiveElement(null);
 
     if (over && over.id === 'beaker') {
       if (beakerElements.length >= 10) {
@@ -220,7 +229,7 @@ function App() {
   };
 
   return (
-    <DndContext onDragEnd={handleDragEnd}>
+    <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       <div className="app">
         <Toaster position="top-center" />
 
@@ -425,6 +434,22 @@ function App() {
           allElements={allPeriodicElements}
           onToggleElement={toggleElement}
         />
+
+        {/* Sürükleme Overlay */}
+        <DragOverlay>
+          {activeElement ? (
+            <div 
+              className="dragging-element"
+              style={{
+                backgroundColor: activeElement.color,
+                color: activeElement.textColor,
+              }}
+            >
+              <div className="element-symbol-dragging">{activeElement.symbol}</div>
+              <div className="element-name-dragging">{activeElement.name}</div>
+            </div>
+          ) : null}
+        </DragOverlay>
       </div>
     </DndContext>
   );

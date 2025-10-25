@@ -809,6 +809,44 @@ body {
   }
 }
 
+/* Sürükleme Animasyonu */
+.dragging-element {
+  padding: 1.5rem;
+  border-radius: 15px;
+  text-align: center;
+  border: 3px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  cursor: grabbing;
+  transform: rotate(5deg) scale(1.1);
+  animation: dragPulse 0.5s ease-in-out infinite alternate;
+  z-index: 10000;
+  pointer-events: none;
+}
+
+@keyframes dragPulse {
+  from {
+    transform: rotate(5deg) scale(1.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  }
+  to {
+    transform: rotate(-5deg) scale(1.15);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.element-symbol-dragging {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.element-name-dragging {
+  font-size: 1rem;
+  opacity: 0.9;
+  font-weight: 600;
+}
+
 /* Periyodik Tablo Stilleri */
 .periodic-table-overlay {
   position: fixed;
