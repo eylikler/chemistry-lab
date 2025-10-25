@@ -5,7 +5,7 @@ const ReactionDisplay = ({ discoveredCompounds }) => {
     <div className="reaction-display">
       <h3 className="section-title">
         🔬 Keşfedilen Bileşikler
-        <span className="count-badge">{discoveredCompounds.length}/6</span>
+        <span className="count-badge">{discoveredCompounds.length}/7</span>
       </h3>
 
       <div className="compounds-list">
@@ -71,17 +71,17 @@ const ReactionDisplay = ({ discoveredCompounds }) => {
               className="progress-fill"
               initial={{ width: 0 }}
               animate={{
-                width: `${(discoveredCompounds.length / 6) * 100}%`,
+                width: `${(discoveredCompounds.length / 7) * 100}%`,
               }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
             />
           </div>
           <div className="progress-text">
-            {discoveredCompounds.length === 6 ? (
+            {discoveredCompounds.length === 7 ? (
               <span className="complete-text">🎉 Tüm bileşikler keşfedildi!</span>
             ) : (
               <span>
-                {6 - discoveredCompounds.length} bileşik daha keşfet!
+                {7 - discoveredCompounds.length} bileşik daha keşfet!
               </span>
             )}
           </div>

@@ -46,6 +46,14 @@ export const reactions = {
     effect: 'crystallize',
     description: 'Tebeşir ve kireçtaşı!',
     points: 250
+  },
+  'CH3COOH': {
+    name: 'Asetik Asit (Sirke)',
+    elements: ['C', 'H', 'H', 'H', 'C', 'O', 'O', 'H'],
+    color: '#F59E0B',
+    effect: 'vapour',
+    description: 'Sirkenin ekşi tadı!',
+    points: 350
   }
 };
 

@@ -9,8 +9,8 @@ Modern ve eğlenceli bir React uygulaması! Elementleri sürükle-bırak ile kar
 ## ✨ Özellikler
 
 ### 🎮 Oyun Mekanikleri
-- **8 Farklı Element:** Hidrojen, Oksijen, Karbon, Azot, Sodyum, Klor, Sülfür, Kalsiyum
-- **6 Keşfedilebilir Bileşik:** Su, Karbondioksit, Amonyak, Tuz, Sülfürik Asit, Kalsiyum Karbonat
+- **20 Farklı Element:** Periyodik tablodan istediğiniz elementi ekleyin!
+- **7 Keşfedilebilir Bileşik:** Su, Karbondioksit, Amonyak, Tuz, Sülfürik Asit, Kalsiyum Karbonat, Asetik Asit
 - **Puan Sistemi:** Her doğru kombinasyon puan kazandırır
 - **İlerleme Takibi:** Keşfedilen bileşikleri görüntüleyin
 
@@ -71,6 +71,7 @@ Uygulama `http://localhost:5173` adresinde çalışacaktır.
 - **Tuz (NaCl):** 1 Sodyum + 1 Klor
 - **Sülfürik Asit (H₂SO₄):** 2 Hidrojen + 1 Sülfür + 4 Oksijen
 - **Kalsiyum Karbonat (CaCO₃):** 1 Kalsiyum + 1 Karbon + 3 Oksijen
+- **Asetik Asit (CH₃COOH):** 1 Karbon + 3 Hidrojen + 1 Karbon + 2 Oksijen + 1 Hidrojen
 
 ## 📁 Proje Yapısı
 

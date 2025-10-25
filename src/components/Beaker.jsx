@@ -17,26 +17,38 @@ const Beaker = ({ elements, liquidColor, isShaking, onRemoveElement }) => {
     }
   }, [isOver]);
 
-  // Element sayısını hesapla (H₂O formatı için)
+  // Element sayısını hesapla - tam eklenme sırasına göre
   const getFormula = () => {
     if (elements.length === 0) return 'Boş';
 
-    const elementCounts = {};
-    elements.forEach((el) => {
-      elementCounts[el] = (elementCounts[el] || 0) + 1;
-    });
-
-    return Object.entries(elementCounts)
-      .map(([symbol, count]) => {
-        if (count === 1) return symbol;
+    const result = [];
+    let i = 0;
+    
+    while (i < elements.length) {
+      const currentElement = elements[i];
+      let count = 1;
+      
+      // Arka arkaya aynı elementi say
+      while (i + count < elements.length && elements[i + count] === currentElement) {
+        count++;
+      }
+      
+      // Elementi ekle
+      if (count === 1) {
+        result.push(currentElement);
+      } else {
         // Alt simge için Unicode karakterler kullan
-        const subscripts = { 2: '₂', 3: '₃', 4: '₄', 5: '₅', 6: '₆', 7: '₇' };
-        return symbol + (subscripts[count] || count);
-      })
-      .join('');
+        const subscripts = { 2: '₂', 3: '₃', 4: '₄', 5: '₅', 6: '₆', 7: '₇', 8: '₈', 9: '₉' };
+        result.push(currentElement + (subscripts[count] || count));
+      }
+      
+      i += count;
+    }
+
+    return result.join('');
   };
 
-  const liquidHeight = Math.min((elements.length / 4) * 100, 80);
+  const liquidHeight = Math.min((elements.length / 10) * 100, 80);
 
   return (
     <motion.div
@@ -151,13 +163,13 @@ const Beaker = ({ elements, liquidColor, isShaking, onRemoveElement }) => {
         )}
 
         {/* Element limiti uyarısı */}
-        {elements.length >= 4 && !isOver && (
+        {elements.length >= 10 && !isOver && (
           <motion.div
             className="limit-warning"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            Maximum 4 element!
+            Maximum 10 element!
           </motion.div>
         )}
       </div>
