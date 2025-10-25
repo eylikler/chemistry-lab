@@ -26,6 +26,7 @@ function App() {
   const [selectedCompound, setSelectedCompound] = useState(null);
   const [showCompoundModal, setShowCompoundModal] = useState(false);
   const [showExplosion, setShowExplosion] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
 
   // Ses efektleri
   const playSound = (type) => {
@@ -482,6 +483,16 @@ function App() {
           className="reference-btn"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
+          onClick={() => setShowAbout(true)}
+          title="Proje Hakkında"
+        >
+          ℹ️
+        </motion.button>
+
+        <motion.button
+          className="reference-btn periodic-btn"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
           onClick={() => setShowPeriodicTable(true)}
           title="Periyodik Tabloyu Aç"
         >
@@ -519,6 +530,112 @@ function App() {
           isOpen={showCompoundModal}
           onClose={closeCompoundModal}
         />
+
+        {/* Hakkında Modal */}
+        <AnimatePresence>
+          {showAbout && (
+            <motion.div
+              className="about-overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowAbout(false)}
+            >
+              <motion.div
+                className="about-modal"
+                initial={{ scale: 0.8, opacity: 0, y: 50 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.8, opacity: 0, y: 50 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button className="close-btn" onClick={() => setShowAbout(false)}>
+                  ✕
+                </button>
+
+                <div className="about-content">
+                  <h1>🧪 Kimya Laboratuvarı</h1>
+                  <p className="subtitle">İnteraktif Element Karıştırma Oyunu</p>
+
+                  <div className="about-section">
+                    <h2>🎯 Proje Amacı</h2>
+                    <p>
+                      Kimya öğrenmeyi eğlenceli ve interaktif hale getirmek! 
+                      Elementleri karıştırarak gerçek kimyasal bileşikleri keşfet, 
+                      puan kazan ve kimya bilgini geliştir.
+                    </p>
+                  </div>
+
+                  <div className="about-section">
+                    <h2>✨ Özellikler</h2>
+                    <ul className="features-list">
+                      <li>🎮 <strong>Sürükle-Bırak:</strong> Elementleri beaker'a sürükle</li>
+                      <li>➕ <strong>Tek Tık:</strong> '+' butonuyla hızlıca ekle</li>
+                      <li>⚛️ <strong>19 Element:</strong> Hidrojen'den Gümüş'e</li>
+                      <li>🧪 <strong>24 Bileşik:</strong> Su'dan Glikoz'a</li>
+                      <li>💥 <strong>Görsel Efektler:</strong> Her reaksiyon için özel animasyon</li>
+                      <li>🎨 <strong>Gerçekçi Beaker:</strong> Cam efekti ve renkli sıvılar</li>
+                      <li>🏆 <strong>Puan Sistemi:</strong> Keşiflerle puan kazan</li>
+                      <li>📊 <strong>Periyodik Tablo:</strong> Tüm elementlere eriş</li>
+                      <li>📱 <strong>Responsive:</strong> Mobil ve masaüstü uyumlu</li>
+                      <li>🎓 <strong>Eğitici:</strong> Her bileşik hakkında bilgi</li>
+                    </ul>
+                  </div>
+
+                  <div className="about-section">
+                    <h2>🎮 Nasıl Oynanır?</h2>
+                    <ol className="how-to-list">
+                      <li>Sol panelden elementleri seç (sürükle veya '+'ya tıkla)</li>
+                      <li>Beaker'a elementleri ekle (max 25)</li>
+                      <li>"Karıştır" butonuna bas</li>
+                      <li>Doğru kombinasyonu bulduysan → Başarı! 🎉</li>
+                      <li>Bileşikler listesinde keşfini gör</li>
+                      <li>Bileşik detayları için tıkla</li>
+                    </ol>
+                  </div>
+
+                  <div className="about-section">
+                    <h2>🎨 Teknolojiler</h2>
+                    <div className="tech-badges">
+                      <span className="tech-badge">⚛️ React</span>
+                      <span className="tech-badge">🎭 Framer Motion</span>
+                      <span className="tech-badge">🖱️ DnD Kit</span>
+                      <span className="tech-badge">🔥 React Hot Toast</span>
+                      <span className="tech-badge">✨ tsParticles</span>
+                      <span className="tech-badge">🎊 Canvas Confetti</span>
+                    </div>
+                  </div>
+
+                  <div className="about-section stats">
+                    <h2>📊 İstatistikler</h2>
+                    <div className="stats-grid">
+                      <div className="stat-card">
+                        <div className="stat-number">19</div>
+                        <div className="stat-label">Element</div>
+                      </div>
+                      <div className="stat-card">
+                        <div className="stat-number">24</div>
+                        <div className="stat-label">Bileşik</div>
+                      </div>
+                      <div className="stat-card">
+                        <div className="stat-number">6</div>
+                        <div className="stat-label">Efekt Tipi</div>
+                      </div>
+                      <div className="stat-card">
+                        <div className="stat-number">∞</div>
+                        <div className="stat-label">Eğlence</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="about-footer">
+                    <p>🚀 İyi eğlenceler ve başarılı keşifler!</p>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Patlama Efekti */}
         <AnimatePresence>
